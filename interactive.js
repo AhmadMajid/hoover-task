@@ -16,10 +16,12 @@ window.addEventListener('load', () => {
   instructionsText.addEventListener('click', () => {
     hooverPositionX.textContent = hoover.position.x
     hooverPositionY.textContent = hoover.position.y
+    console.log("The final coordinates of the hoover is: " + (hooverPositionX.textContent) + ", " + (hooverPositionY.textContent));
   })
 
   patchesOfDirtText.addEventListener('click', () => {
     dirtySection.textContent = hoover.counter
+    console.log(("The number of patches cleaned were: ") + dirtySection.textContent)
   })
 
   input.addEventListener('change', (i) => {
@@ -46,6 +48,5 @@ window.addEventListener('load', () => {
     return newArray
   }
 
-console.log(hooverPositionX)
 
 })
