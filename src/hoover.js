@@ -20,4 +20,24 @@ class Hoover {
     return this.position
   }
 
+  runHoover(instructions) {
+    let arrayInstructions = instructions.split('')
+
+    arrayInstructions.forEach((instruction) => {
+      this.moveHoover(instruction)
+
+      this.patchDirt.forEach((dirtyPatch) => {
+        if (this.position.x == dirtyPatch[0] && this.position.y == dirtyPatch[1]){
+          let index = this.patchDirt.indexOf(dirtyPatch)
+          this.counter +=1
+          this.patchDirt.splice(index, 1)
+        }
+      })
+    })
+
+    return `Here are the X and Y coordinates marking the position of the hoover after processing all commands: X:${this.position.x}, Y:${this.position.y}.`
+    return `Here are the number of patches of dirt the robot cleaned up: ${this.counter}`
+  }
+
+
 }
