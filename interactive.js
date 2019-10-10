@@ -22,7 +22,7 @@ window.addEventListener('load', () => {
     dirtySection.textContent = hoover.counter
   })
 
-  input.addEventListener('change', (e) => {
+  input.addEventListener('change', (i) => {
     const reader = new FileReader()
     reader.onload = () => {
       lines = reader.result.split('\n').map((line) => {
@@ -45,5 +45,7 @@ window.addEventListener('load', () => {
     }
     return newArray
   }
+
+console.log(hooverPositionX)
 
 })
