@@ -1,32 +1,28 @@
 window.addEventListener('load', () => {
   let roomDimensions;
   let hooverPosition;
-  let patchDirt;
+  let patchesOfDirt;
   let instructions = 'NNESEESWNWW'
   let lines;
   let hoover;
   const hooverPositionX = document.querySelector('.hoover-position .x-coordinate')
   const hooverPositionY = document.querySelector('.hoover-position .y-coordinate')
-  const dirt = document.querySelector('.dirt .patch-dirt')
-  const coordinates = document.querySelector('.coordinate')
-  const dirtyPatchesMessage = document.querySelector('.patch-dirt-mesesage')
+  const dirtySection = document.querySelector('.dirt .patches-of-dirt')
+  const instructionsText = document.querySelector('.coordinate-message')
+  const patchesOfDirtText = document.querySelector('.patches-of-dirt-text')
   const input = document.querySelector('input[type="file"]')
 
-  let hoover = new Hoover(roomDimensions, hooverPosition, patchDirt, instructions)
 
-  hoover.runHoover(hoover.instructions)
-
-  coordinates.addEventListener('click', () => {
+  instructionsText.addEventListener('click', () => {
     hooverPositionX.textContent = hoover.position.x
     hooverPositionY.textContent = hoover.position.y
   })
 
-  dirtyPatchesMessage.addEventListener('click', () => {
-    dirt.textContent = hoover.counter
+  patchesOfDirtText.addEventListener('click', () => {
+    dirtySection.textContent = hoover.counter
   })
 
-
-  input.addEventListener('change', (c) => {
+  input.addEventListener('change', (e) => {
     const reader = new FileReader()
     reader.onload = () => {
       lines = reader.result.split('\n').map((line) => {
@@ -35,8 +31,8 @@ window.addEventListener('load', () => {
       lines.splice(-1,1)
       roomDimensions = stringToInt(lines[0])
       hooverPosition = stringToInt(lines[1])
-      patchDirt = [stringToInt(lines[2]), stringToInt(lines[3]), stringToInt(lines[4])]
-      hoover = new Hoover(roomDimensions, hooverPosition, patchDirt, instructions)
+      patchesOfDirt = [stringToInt(lines[2]), stringToInt(lines[3]), stringToInt(lines[4])]
+      hoover = new Hoover(roomDimensions, hooverPosition, patchesOfDirt, instructions)
       hoover.runHoover(hoover.instructions)
     }
     reader.readAsText(input.files[0])
@@ -49,7 +45,5 @@ window.addEventListener('load', () => {
     }
     return newArray
   }
-
-
 
 })

@@ -1,43 +1,40 @@
 class Hoover {
-  constructor(roomDimensions, hooverPosition, patchDirt, instructions) {
-    this.roomDimensions = roomDimensions;
+  constructor(roomDimensions, hooverPosition, patchesOfDirt, instructions) {
+    this.roomDimensions = {x: roomDimensions[0], y: roomDimensions[1]};
     this.position = {x: hooverPosition[0], y: hooverPosition[1]};
-    this.patchDirt = patchDirt;
+    this.patchesOfDirt = patchesOfDirt;
     this.instructions = instructions;
+
     this.counter = 0;
   }
 
-  moveHoover(instructions) {
-    if(instructions == 'N') {
+  moveHoover(instruction) {
+    if(instruction == 'N' && this.position.y < 5) {
       this.position.y += 1;
-    }else if (instructions == 'E') {
+    }else if (instruction == 'E' && this.position.x < 5) {
       this.position.x += 1;
-    }else if (instructions == 'S') {
+    }else if (instruction == 'S' && this.position.y > -1) {
       this.position.y -= 1;
-    }else if (instructions == 'W') {
+    }else if (instruction == 'W' && this.position.x > -1) {
       this.position.x -= 1;
     }
+
     return this.position
   }
 
   runHoover(instructions) {
-    let arrayInstructions = instructions.split('')
+    let arrayinstructions = instructions.split('')
 
-    arrayInstructions.forEach((instruction) => {
+    arrayinstructions.forEach((instruction) => {
       this.moveHoover(instruction)
 
-      this.patchDirt.forEach((dirtyPatch) => {
-        if (this.position.x == dirtyPatch[0] && this.position.y == dirtyPatch[1]){
-          let index = this.patchDirt.indexOf(dirtyPatch)
+      this.patchesOfDirt.forEach((patchOfDirt) => {
+        if (this.position.x == patchOfDirt[0] && this.position.y == patchOfDirt[1]){
+          let index = this.patchesOfDirt.indexOf(patchOfDirt)
           this.counter +=1
-          this.patchDirt.splice(index, 1)
+          this.patchesOfDirt.splice(index, 1)
         }
       })
     })
-
-    return `Here are the X and Y coordinates marking the position of the hoover after processing all commands: X:${this.position.x}, Y:${this.position.y}.`
-    return `Here are the number of patches of dirt the robot cleaned up: ${this.counter}`
   }
-
-
 }
